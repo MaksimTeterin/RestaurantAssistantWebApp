@@ -1,5 +1,3 @@
-// Type definitions for Next.js cacheLife configs
-
 declare module 'next/cache' {
   export { unstable_cache } from 'next/dist/server/web/spec-extension/unstable-cache'
   export {
@@ -9,45 +7,18 @@ declare module 'next/cache' {
     refresh,
   } from 'next/dist/server/web/spec-extension/revalidate'
   export { unstable_noStore } from 'next/dist/server/web/spec-extension/unstable-no-store'
-
-  
-    /**
-     * Cache this `"use cache"` for a timespan defined by the `"default"` profile.
-     * ```
-     *   stale:      300 seconds (5 minutes)
-     *   revalidate: 900 seconds (15 minutes)
-     *   expire:     never
-     * ```
-     * 
-     * This cache may be stale on clients for 5 minutes before checking with the server.
-     * If the server receives a new request after 15 minutes, start revalidating new values in the background.
-     * It lives for the maximum age of the server cache. If this entry has no traffic for a while, it may serve an old value the next request.
-     */
+declare module 'next/cache' {
+  export { unstable_cache } from 'next/dist/server/web/spec-extension/unstable-cache'
+  export {
+    updateTag,
+    revalidateTag,
+    revalidatePath,
+    refresh,
+  } from 'next/dist/server/web/spec-extension/revalidate'
+  export { unstable_noStore } from 'next/dist/server/web/spec-extension/unstable-no-store'
     export function cacheLife(profile: "default"): void
-    
-    /**
-     * Cache this `"use cache"` for a timespan defined by the `"seconds"` profile.
-     * ```
-     *   stale:      30 seconds
-     *   revalidate: 1 seconds
-     *   expire:     60 seconds (1 minute)
-     * ```
-     * 
-     * This cache may be stale on clients for 30 seconds before checking with the server.
-     * If the server receives a new request after 1 seconds, start revalidating new values in the background.
-     * If this entry has no traffic for 1 minute it will expire. The next request will recompute it.
-     */
     export function cacheLife(profile: "seconds"): void
-    
-    /**
-     * Cache this `"use cache"` for a timespan defined by the `"minutes"` profile.
-     * ```
-     *   stale:      300 seconds (5 minutes)
-     *   revalidate: 60 seconds (1 minute)
-     *   expire:     3600 seconds (1 hour)
-     * ```
-     * 
-     * This cache may be stale on clients for 5 minutes before checking with the server.
+    export function cacheLife(profile: "minutes"): void
      * If the server receives a new request after 1 minute, start revalidating new values in the background.
      * If this entry has no traffic for 1 hour it will expire. The next request will recompute it.
      */
