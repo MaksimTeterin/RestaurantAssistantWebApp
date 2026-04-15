@@ -1,6 +1,7 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import AuthToRestaurantAPI from "@/app/actions/AuthToRestaurantAPI";
+import { env } from "process";
 
 const useSecureCookies =
   process.env.NEXTAUTH_URL?.startsWith("https://") || process.env.NODE_ENV === "production";
@@ -26,8 +27,8 @@ export const authOptions: NextAuthOptions = {
   },
   providers: [
     GoogleProvider({
-      clientId: "",
-      clientSecret: "",
+      clientId: env.CLIENT_ID!,
+      clientSecret: env.CLIENT_SECRET!,
     }),
   ],
 
